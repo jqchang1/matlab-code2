@@ -1,0 +1,31 @@
+安装命令行 Git 客户端，并使其在系统范围内可用。要检查是否安装了 Git，请在 MATLAB 命令行窗口中输入命令 !git。如果该命令不返回任何内容，您需要安装命令行 Git。有关详细信息，请参阅安装命令行 Git 客户端。
+
+关闭所有 MATLAB 会话。
+
+使用 ssh-keygen 命令生成 SSH 密钥。例如，在 Windows 命令提示符下，输入以下命令：
+
+ssh-keygen -t ed25519 -C "your_email@example.com"
+ssh-keygen 提示您确认保存密钥的位置，并询问密码短语。如果您不想在使用密钥时键入密码，请将密码短语留空。
+如果您在指定的文件夹中已有密钥，ssh-keygen 会询问您是否覆盖它们。
+
+在 R2021a 之前，指定 -m PEM 选项以生成 RSA 格式的 SSH 密钥。否则，ssh-keygen 会使用默认 OpenSSH 格式创建 SSH 密钥，这在 R2021a 之前的 MATLAB 版本中不受支持。例如，在 Windows 命令提示符下，输入以下命令：
+
+ssh-keygen -m PEM
+如果您在未指定 -m PEM 选项的情况下生成 SSH 密钥，您可以使用此命令将密钥转换为受支持的 RSA 格式，其中 ~/.ssh/id_rsa 是 SSH 密钥文件的名称。
+ssh-keygen -p -m PEM -f ~/.ssh/id_rsa
+将您的密钥放在 USERPROFILE/.ssh 或 HOME/.ssh 文件夹中。要验证 MATLAB 正在使用哪个 USERPROFILE 文件夹，请在 MATLAB 命令行窗口中输入：
+
+getenv('USERPROFILE')
+在 R2021a 之前，如果您使用 -m PEM 选项创建 SSH 密钥，则可以跳过步骤 5。
+
+要确保 MATLAB 检测到 SSH 密钥，请在 MATLAB 命令行窗口中输入：
+
+git = settings().matlab.sourcecontrol.git;
+git.PrivateKeyFile.PersonalValue = "C:\Users\91932\.ssh\id_rsa";
+git.PublicKeyFile.PersonalValue = "C:\Users\91932\.ssh\id_rsa.pub";
+如果您在生成 SSH 密钥时输入了密码短语，请将 MATLAB 配置为使用该密码短语，并在每个会话中只接收一次提示。为此，请使用 Pageant，或在 MATLAB 命令行窗口中输入：
+
+git.KeyHasPassphrase.PersonalValue = true;
+要使用多个密钥，请使用 Pageant 作为 SSH 代理。如果 Pageant 正在运行，则 MATLAB 在 Pageant 中查找密钥，然后在 USERPROFILE/.ssh 中查找。
+
+将您的 GitHub® 或 GitLab® 帐户配置为使用 SSH 密钥。要完成这一配置，请转至 .ssh 文件夹，复制 .pub 文件的内容。然后，转至您的帐户设置，在 SSH Keys 部分中，将 .pub 文件的内容粘贴到 Add SSH key 字段中。

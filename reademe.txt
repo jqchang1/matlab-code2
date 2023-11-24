@@ -29,3 +29,13 @@ git.KeyHasPassphrase.PersonalValue = true;
 要使用多个密钥，请使用 Pageant 作为 SSH 代理。如果 Pageant 正在运行，则 MATLAB 在 Pageant 中查找密钥，然后在 USERPROFILE/.ssh 中查找。
 
 将您的 GitHub® 或 GitLab® 帐户配置为使用 SSH 密钥。要完成这一配置，请转至 .ssh 文件夹，复制 .pub 文件的内容。然后，转至您的帐户设置，在 SSH Keys 部分中，将 .pub 文件的内容粘贴到 Add SSH key 字段中。
+
+
+
+
+
+
+!git push origin main %推送到远程
+!git push
+!git pull
+!git log --online

@@ -8,4 +8,5 @@ close all
 %3、!git add test5.m 添加到暂存区
 %4、!git status      查看仓库的状态
 %5、!git commit -m"  填写这次更改的信息" git commit只会提交暂存区的内容
-%6、!git log         查看仓库提交历史记录 可以使用 git log --oneline参数来查看简洁的提交记录
+%6、!git status      查看仓库的状态
+%7、!git log         查看仓库提交历史记录 可以使用 git log --oneline参数来查看简洁的提交记录
